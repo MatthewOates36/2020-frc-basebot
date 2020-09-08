@@ -1,4 +1,6 @@
 single_state:
+  st_drivetrain_percent:
+    behavior: bh_drivetrain_percent
 
 done_for_time_state:
 
