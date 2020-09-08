@@ -74,11 +74,10 @@ talon:
 victor:
 
 motor_group:
-
   opn_drivetrain_left:
-    master: opn_drivetrain_left_master
-    followers: []opn_drivetrain_left_follower]
+    master: opn_drivetrain_left_primary
+    followers: [opn_drivetrain_left_follower]
 
   opn_drivetrain_right:
-    master: opn_drivetrain_right_master
+    master: opn_drivetrain_right_primary
     followers: [opn_drivetrain_right_follower]
