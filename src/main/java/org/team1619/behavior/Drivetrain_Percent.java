@@ -45,6 +45,8 @@ public class Drivetrain_Percent implements Behavior {
 	public void update() {
 		double xAxis = fSharedInputValues.getNumeric(fXAxis);
 		double yAxis = fSharedInputValues.getNumeric(fYAxis);
+		boolean gearShiftButtonValue = fSharedInputValues.getBoolean(fGearShiftButton);
+
 
 		// Set the motor speed to the joystick values
 		double leftMotorSpeed = yAxis + xAxis;
@@ -53,6 +55,9 @@ public class Drivetrain_Percent implements Behavior {
 		fSharedOutputValues.setNumeric("opn_drivetrain_left", "percent", leftMotorSpeed);
 		fSharedOutputValues.setNumeric("opn_drivetrain_right", "percent", rightMotorSpeed);
 
+
+		fSharedOutputValues.setBoolean("opb_drivetrain_gear_shifter", gearShiftButtonValue);
+		fSharedInputValues.setBoolean("ipb_is_low_gear", gearShiftButtonValue);
 
 	}
 
