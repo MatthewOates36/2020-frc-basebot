@@ -1,4 +1,38 @@
 talon:
+  opn_drivetrain_front_left:
+    device_number: 0
+    inverted: true
+    current_limit_enabled: true
+    continuous_current_limit_amps: 25
+    peak_current_limit_amps: 30
+    peak_current_duration_milliseconds: 100
+
+
+  opn_drivetrain_back_left:
+    device_number: 1
+    inverted: true
+    current_limit_enabled: true
+    continuous_current_limit_amps: 25
+    peak_current_limit_amps: 30
+    peak_current_duration_milliseconds: 100
+
+
+  opn_drivetrain_front_right:
+    device_number: 14
+    inverted: true
+    current_limit_enabled: true
+    continuous_current_limit_amps: 25
+    peak_current_limit_amps: 30
+    peak_current_duration_milliseconds: 100
+
+
+  opn_drivetrain_back_right:
+    device_number: 15
+    inverted: false
+    current_limit_enabled: true
+    continuous_current_limit_amps: 25
+    peak_current_limit_amps: 30
+    peak_current_duration_milliseconds: 100
 
 victor:
 
