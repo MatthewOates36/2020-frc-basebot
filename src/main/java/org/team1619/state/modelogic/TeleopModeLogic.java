@@ -40,6 +40,12 @@ public class TeleopModeLogic extends AbstractModeLogic {
 
 			case "st_drivetrain_percent":
 				return true;
+			case "st_collector_zero":
+				return !fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed");
+			case "st_collector_retract":
+				return fSharedInputValues.getBooleanRisingEdge("ipb_operator_dpad_right");
+			case "st_collector_extend":
+				return fSharedInputValues.getBooleanRisingEdge("ipb_operator_dpad_right");
 			default:
 				return false;
 		}
