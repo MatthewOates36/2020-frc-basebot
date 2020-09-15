@@ -1,6 +1,37 @@
 single_state:
+  # Drivetrain
   st_drivetrain_percent:
     behavior: bh_drivetrain_percent
+
+  # Collector
+  st_collector_zero:
+    behavior: bh_collector_zero
+    behavior_config:
+      timeout_time: 500
+
+  st_collector_floor_intake:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: 0.9
+
+  st_collector_extend:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: 0.0
+
+  st_collector_retract:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: false
+      roller_speed: 0.0
+
+  st_collector_stop:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: 0.0
 
 done_for_time_state:
 

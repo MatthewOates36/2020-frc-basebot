@@ -1,4 +1,5 @@
 talon:
+  # Drivetrain
   opn_drivetrain_left_primary:
     device_number: 0
     inverted: true
@@ -70,6 +71,11 @@ talon:
     continuous_current_limit_amps: 25
     peak_current_limit_amps: 30
     peak_current_duration_milliseconds: 100
+
+  # Collector
+  opn_collector_roller:
+    device_number: 5
+    inverted: true
 
 victor:
 

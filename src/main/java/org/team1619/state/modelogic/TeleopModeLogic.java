@@ -26,7 +26,6 @@ public class TeleopModeLogic extends AbstractModeLogic {
 
 	@Override
 	public void update() {
-
 	}
 
 	@Override
@@ -37,6 +36,14 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	@Override
 	public boolean isReady(String name) {
 		switch (name) {
+			case "st_collector_floor_intake":
+				return fSharedInputValues.getBoolean("ipb_operator_a");
+			case "st_collector_extend":
+				return fSharedInputValues.getBoolean("ipb_operator_b");
+			case "st_collector_retract":
+				return fSharedInputValues.getBoolean("ipb_operator_x");
+			case "st_collector_stop":
+				return fSharedInputValues.getBoolean("ipb_operator_y");
 			default:
 				return false;
 		}
