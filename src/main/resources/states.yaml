@@ -3,6 +3,33 @@ single_state:
   st_drivetrain_percent:
     behavior: bh_drivetrain_percent
 
+  st_collector_zero:
+    behavior: bh_collector_zero
+
+  st_collector_intake_floor:
+    behavior: bh_collector_states
+    behavior_config:
+        solenoid_position: true
+        roller_speed: 1.0
+
+  st_collector_stop:
+    behavior: bh_collector_states
+    behavior_config:
+        solenoid_position: false
+        roller_speed: 0.0
+
+  st_collector_retract:
+    behavior: bh_collector_states
+    behavior_config:
+        solenoid_position: false
+        roller_speed: 0.0
+
+  st_collector_extend:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: false
+      roller_speed: 0.0
+
 done_for_time_state:
 
 parallel_state:

@@ -7,11 +7,15 @@ general:
     sequences:
 
     parallels:
+    ss_collector:
+      priority_level_1: [st_collector_intake_floor, st_collector_stop, st_collector_retract, st_collector_extend, st_collector_zero]
+      default: [st_collector_intake_floor,st_collector_zero]
+
     ss_drivetrain:
       priority_level_1: [st_drivetrain_percent]
       default: [st_drivetrain_percent]
 
-  subsystems: [ss_drivetrain]
+  subsystems: [ss_drivetrain,ss_collector]
 
   input_booleans: [
     ipb_driver_a, ipb_driver_b, ipb_driver_y, ipb_driver_x, ipb_driver_left_bumper, ipb_driver_right_bumper, ipb_driver_left_trigger, ipb_driver_right_trigger, ipb_driver_dpad_up, ipb_driver_dpad_down, ipb_driver_dpad_left, ipb_driver_dpad_right, ipb_driver_back, ipb_driver_start, ipb_driver_left_stick_button, ipb_driver_right_stick_button,
@@ -26,9 +30,11 @@ general:
 
   input_vectors: []
 
-  output_numerics: [opn_drivetrain_front_left, opn_drivetrain_front_right, opn_drivetrain_back_left, opn_drivetrain_back_right]
+  output_numerics: [opn_drivetrain_front_left, opn_drivetrain_front_right, opn_drivetrain_back_left, opn_drivetrain_back_right,
+                    opn_collector_rollers
+                   ]
 
-  output_booleans: [opb_drivetrain_gear_shifter]
+  output_booleans: [opb_drivetrain_gear_shifter, opb_collector_deploy]
 
 
 global_timing:
@@ -43,6 +49,10 @@ global_timing:
 global_drivetrain:
   x: ipn_driver_right_x
   y: ipn_driver_left_y
+
+global_collector:
+  floor_intake: ipb_driver_left_trigger
+  stop: ipb_driver_right_bumper
 
 log:
 
