@@ -27,11 +27,11 @@ single_state:
       solenoid_position: false
       roller_speed: 0.0
 
-  st_collector_stop:
-    behavior: bh_collector_states
-    behavior_config:
-      solenoid_position: true
-      roller_speed: 0.0
+#  st_collector_stop:
+#    behavior: bh_collector_states
+#    behavior_config:
+#      solenoid_position: true
+#      roller_speed: 0.0
 
 done_for_time_state:
 
