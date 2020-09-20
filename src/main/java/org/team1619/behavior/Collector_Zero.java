@@ -12,7 +12,7 @@ import org.uacr.utilities.logging.Logger;
 import java.util.Set;
 
 /**
- * Example behavior to copy for other behaviors
+ * Sets the zero to for the Collector
  */
 
 public class Collector_Zero implements Behavior {
@@ -30,6 +30,8 @@ public class Collector_Zero implements Behavior {
 	public Collector_Zero(InputValues inputValues, OutputValues outputValues, Config config, RobotConfiguration robotConfiguration) {
 		fSharedInputValues = inputValues;
 		fSharedOutputValues = outputValues;
+		myTimer = new Timer();
+		myTimer.start(timeoutTime);
 
 
 	}
@@ -37,8 +39,7 @@ public class Collector_Zero implements Behavior {
 	@Override
 	public void initialize(String stateName, Config config) {
 		sLogger.debug("Entering state {}", stateName);
-		myTimer = new Timer();
-		myTimer.start(timeoutTime);
+
 
 	}
 

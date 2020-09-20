@@ -55,8 +55,6 @@ public class TeleopModeLogic extends AbstractModeLogic {
                 return collectorExtend && !rollerPower;
             case "st_collector_retract":
                 return !collectorExtend && !rollerPower;
-            case "st_collector_stop":
-                return collectorExtend && !rollerPower;
             default:
                 return false;
         }

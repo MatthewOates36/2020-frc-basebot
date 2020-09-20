@@ -12,7 +12,7 @@ import org.uacr.utilities.logging.Logger;
 import java.util.Set;
 
 /**
- * Example behavior to copy for other behaviors
+ * States for the new Collector
  */
 
 public class Collector_States implements Behavior {
@@ -25,8 +25,7 @@ public class Collector_States implements Behavior {
 
 	private boolean fSolenoidPosition;
 	private double fRollerSpeed;
-	private boolean fFloorIntake;
-	private boolean fStop;
+
 
 	public Collector_States(InputValues inputValues, OutputValues outputValues, Config config, RobotConfiguration robotConfiguration) {
 		fSharedInputValues = inputValues;

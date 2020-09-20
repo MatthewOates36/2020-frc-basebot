@@ -11,7 +11,7 @@ import org.uacr.utilities.logging.Logger;
 import java.util.Set;
 
 /**
- * Example behavior to copy for other behaviors
+ * Manual mode for the Collector
  */
 
 public class Collector_Manual implements Behavior {
