@@ -1,1 +1,8 @@
 solenoid_double:
+  opb_drivetrain_shifter:
+    device_number_master: 1
+    device_number_slave: 6
+
+  opb_collector_deploy:
+    device_number_master: 5
+    device_number_slave: 2

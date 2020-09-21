@@ -15,6 +15,9 @@ public class TeleopModeLogic extends AbstractModeLogic {
 
 	private static final Logger sLogger = LogManager.getLogger(TeleopModeLogic.class);
 
+	private boolean collectorIsDown;
+	private boolean rollersAreOn;
+
 	public TeleopModeLogic(InputValues inputValues, RobotConfiguration robotConfiguration) {
 		super(inputValues, robotConfiguration);
 	}
@@ -26,6 +29,8 @@ public class TeleopModeLogic extends AbstractModeLogic {
 
 	@Override
 	public void update() {
+		collectorIsDown = fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_trigger");
+		rollersAreOn = !rollersAreOn;
 
 	}
 
@@ -37,6 +42,12 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	@Override
 	public boolean isReady(String name) {
 		switch (name) {
+			case "st_collector_floor_intake":
+				return collectorIsDown && !rollersAreOn;
+			case "st_collector_extend":
+				return collectorIsDown && rollersAreOn;
+			case "st_collector_retract":
+				return fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_bumper");
 			default:
 				return false;
 		}
