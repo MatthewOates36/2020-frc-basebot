@@ -27,6 +27,16 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	@Override
 	public void update() {
 
+		boolean mIsStowed;
+		boolean mRollersOn;
+
+		mIsStowed = false;
+		mRollersOn = false;
+
+		mIsStowed = fSharedInputValues.getBoolean("ipb_collector_solenoid_position");
+
+
+
 	}
 
 	@Override
@@ -43,9 +53,14 @@ public class TeleopModeLogic extends AbstractModeLogic {
 			case "st_collector_zero":
 				return !fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed");
 			case "st_collector_retract":
-				return fSharedInputValues.getBooleanRisingEdge("ipb_operator_dpad_right");
+				return fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_bumper") && fSharedInputValues.getBoolean("ipb_collector_solenoid_position");
+
+
+			case "st_collector_floor_intake":
+				return fSharedInputValues.getBoolean("ipb_driver_left_trigger");
+
 			case "st_collector_extend":
-				return fSharedInputValues.getBooleanRisingEdge("ipb_operator_dpad_right");
+				return fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_trigger") && !fSharedInputValues.getBoolean("ipb_collector_solenoid_position");
 			default:
 				return false;
 		}
@@ -54,6 +69,8 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	@Override
 	public boolean isDone(String name, State state) {
 		switch (name) {
+
+
 			default:
 				return state.isDone();
 		}

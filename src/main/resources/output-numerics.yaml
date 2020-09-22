@@ -25,6 +25,10 @@ talon:
     read_position: true
     read_velocity: true
 
+  opn_collector_rollers:
+    device_number: 5
+    inverted: false
+
 
 victor:
 

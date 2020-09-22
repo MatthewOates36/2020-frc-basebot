@@ -30,7 +30,7 @@ single_state:
   st_collector_stop:
     behavior: bh_collector_states
     behavior_config:
-      solenoid_position: true
+      solenoid_position: false
       roller_speed: 0.0
 
 
