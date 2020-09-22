@@ -48,6 +48,8 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	public boolean isReady(String name) {
 		switch (name) {
 
+			//collector
+
 			case "st_drivetrain_percent":
 				return true;
 			case "st_collector_zero":
