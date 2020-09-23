@@ -21,7 +21,7 @@ single_state:
   st_collector_extend:
     behavior: bh_collector_states
     behavior_config:
-      solenoid_position: false
+      solenoid_position: true
       roller_speed: 0.0
 
 done_for_time_state:

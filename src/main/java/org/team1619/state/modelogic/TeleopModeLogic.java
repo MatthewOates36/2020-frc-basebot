@@ -14,7 +14,7 @@ import org.uacr.utilities.logging.Logger;
 
 public class TeleopModeLogic extends AbstractModeLogic {
     private boolean collectorExtend = true;
-    private boolean rollerPower = true;
+    private boolean rollerPower = false;
 
     private static final Logger sLogger = LogManager.getLogger(TeleopModeLogic.class);
 
@@ -30,10 +30,12 @@ public class TeleopModeLogic extends AbstractModeLogic {
     @Override
     public void update() {
         if (fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_trigger")) {
-            collectorExtend = !collectorExtend;
+            rollerPower = false;
+            collectorExtend = false;
         }
         if (fSharedInputValues.getBooleanRisingEdge("ipb_driver_right_bumper")) {
-            rollerPower = !rollerPower;
+            rollerPower = true;
+            collectorExtend = !collectorExtend;
         }
     }
 
@@ -48,7 +50,7 @@ public class TeleopModeLogic extends AbstractModeLogic {
             case "st_drive_percent":
                 return true;
             case "st_collector_zero":
-                return true;
+                return !fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed");
             case "st_collector_intake_floor":
                 return collectorExtend && rollerPower;
             case "st_collector_extend":

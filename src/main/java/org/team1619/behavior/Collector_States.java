@@ -61,7 +61,6 @@ public class Collector_States implements Behavior {
 
 	@Override
 	public boolean isDone() {
-		fSharedOutputValues.setBoolean("ipb_collector_has_been_zeroed", false);
 		return true;
 	}
 

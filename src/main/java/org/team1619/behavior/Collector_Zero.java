@@ -31,23 +31,21 @@ public class Collector_Zero implements Behavior {
 		fSharedInputValues = inputValues;
 		fSharedOutputValues = outputValues;
 		myTimer = new Timer();
-		myTimer.start(timeoutTime);
-
-
 	}
 
 	@Override
 	public void initialize(String stateName, Config config) {
 		sLogger.debug("Entering state {}", stateName);
-
-
+		fSharedOutputValues.setBoolean("opb_collectors_deploy", false);
+		myTimer.start(timeoutTime);
 	}
 
 	@Override
 	public void update() {
-		fSharedOutputValues.setBoolean("opb_collectors_deploy", false);
 		fSharedOutputValues.setNumeric("opn_collectors_rollers","percent", 0);
-		fSharedOutputValues.setBoolean("ipb_collector_has_been_zeroed", true);
+		if(myTimer.isDone()) {
+			fSharedInputValues.setBoolean("ipb_collector_has_been_zeroed", true);
+		}
 	}
 
 	@Override
@@ -57,9 +55,8 @@ public class Collector_Zero implements Behavior {
 
 	@Override
 	public boolean isDone() {
-		myTimer.isDone();
-		fSharedOutputValues.setBoolean("ipb_collector_has_been_zeroed", false);
-		return true;
+		return fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed");
+
 	}
 
 	@Override
