@@ -23,13 +23,12 @@ public class Collector_Zero implements Behavior {
     private final InputValues fSharedInputValues;
     private final OutputValues fSharedOutputValues;
 
-    private Timer fDelay = new Timer();
+    private Timer fDelay;
 
     public Collector_Zero(InputValues inputValues, OutputValues outputValues, Config config, RobotConfiguration robotConfiguration) {
         fSharedInputValues = inputValues;
         fSharedOutputValues = outputValues;
-        fDelay.reset();
-
+        fDelay = new Timer();
     }
 
     @Override
@@ -59,7 +58,7 @@ public class Collector_Zero implements Behavior {
     @Override
     public boolean isDone() {
         if(fDelay.isDone()) {
-            fSharedInputValues.setBoolean("ipn_collector_has_been_zeroed", true);
+            fSharedInputValues.setBoolean("ipb_collector_has_been_zeroed", true);
             sLogger.debug("Collector -> Zeroed");
             return true;
         }
