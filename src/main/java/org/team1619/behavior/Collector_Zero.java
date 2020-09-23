@@ -36,7 +36,7 @@ public class Collector_Zero implements Behavior {
 	@Override
 	public void initialize(String stateName, Config config) {
 		sLogger.debug("Entering state {}", stateName);
-		fSharedOutputValues.setBoolean("opb_collectors_deploy", false);
+		fSharedOutputValues.setBoolean("opb_collectors_deploy", true);
 		myTimer.start(timeoutTime);
 	}
 

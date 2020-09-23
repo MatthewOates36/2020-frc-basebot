@@ -12,13 +12,13 @@ general:
       priority_level_1: [st_collector_intake_floor, st_collector_retract, st_collector_extend]
 
     ss_drivetrain:
-      priority_level_1: [st_drivetrain_percent]
+      priority_level_1: []
       default: [st_drivetrain_percent]
 
-  subsystems: [ss_collector]
+  subsystems: [ss_drivetrain, ss_collector]
 
   input_booleans: [
-    ipb_operator_right_bumper, ipb_operator_left_trigger
+    ipb_operator_right_bumper, ipb_operator_left_bumper
   ]
 
   input_numerics: [
