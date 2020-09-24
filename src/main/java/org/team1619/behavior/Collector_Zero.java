@@ -42,24 +42,24 @@ public class Collector_Zero implements Behavior {
 
         mSolenoidPosition = config.getBoolean("solenoid_position", false);
 
-        fDelayTimer.reset();
         fDelayTimer.start(fDelayTime);
+        fSharedOutputValues.setNumeric("opn_collector_rollers", "percent", 0.0);
+        fSharedOutputValues.setBoolean("opb_collector_extend", mSolenoidPosition);
+        fSharedInputValues.setBoolean("ipb_collector_solenoid_position", mSolenoidPosition);
     }
 
     @Override
     public void update() {
 
-        if (!fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed")) {
-            fSharedOutputValues.setNumeric("opn_collector_rollers", "percent", 0.0);
-            fSharedOutputValues.setBoolean("opb_collector_extend", mSolenoidPosition);
-            fSharedInputValues.setBoolean("ipb_collector_solenoid_position", mSolenoidPosition);
+
             if (fDelayTimer.isDone()) {
                 fSharedInputValues.setBoolean("ipb_collector_has_been_zeroed", true);
                 sLogger.debug("Collector Zero -> Zeroed");
+                fDelayTimer.reset();
 
             }
         }
-    }
+
 
     @Override
     public void dispose() {

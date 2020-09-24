@@ -38,14 +38,15 @@ public class Collector_States implements Behavior {
 
         mSolenoidPosition = config.getBoolean("solenoid_position", false);
         mRollerSpeed = config.getDouble("roller_speed", 0.0);
+        fSharedOutputValues.setNumeric("opn_collector_rollers", "percent", mRollerSpeed);
+        fSharedOutputValues.setBoolean("opb_collector_extend", mSolenoidPosition);
+        fSharedInputValues.setBoolean("ipb_collector_solenoid_position", mSolenoidPosition);
     }
 
     @Override
     public void update() {
 
-        fSharedOutputValues.setNumeric("opn_collector_rollers", "percent", mRollerSpeed);
-        fSharedOutputValues.setBoolean("opb_collector_extend", mSolenoidPosition);
-        fSharedInputValues.setBoolean("ipb_collector_solenoid_position", mSolenoidPosition);
+
     }
 
     @Override

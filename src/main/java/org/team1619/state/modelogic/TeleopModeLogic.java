@@ -15,6 +15,11 @@ public class TeleopModeLogic extends AbstractModeLogic {
 
 	private static final Logger sLogger = LogManager.getLogger(TeleopModeLogic.class);
 
+	boolean mIsStowed = false;
+	boolean mRollersOn= false;
+
+
+
 	public TeleopModeLogic(InputValues inputValues, RobotConfiguration robotConfiguration) {
 		super(inputValues, robotConfiguration);
 	}
@@ -22,19 +27,29 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	@Override
 	public void initialize() {
 		sLogger.info("***** TELEOP *****");
+
+
 	}
 
 	@Override
 	public void update() {
 
-		boolean mIsStowed;
-		boolean mRollersOn;
 
-		mIsStowed = false;
-		mRollersOn = false;
+		if(fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_bumper")) {
 
-		mIsStowed = fSharedInputValues.getBoolean("ipb_collector_solenoid_position");
+			mRollersOn = false;
+			mIsStowed = false;
 
+
+		}
+
+		if(fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_trigger") ) {
+
+			mRollersOn = !mRollersOn;
+			mIsStowed = true;
+
+
+		}
 
 
 	}
@@ -54,15 +69,17 @@ public class TeleopModeLogic extends AbstractModeLogic {
 				return true;
 			case "st_collector_zero":
 				return !fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed");
-			case "st_collector_retract":
-				return fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_bumper") && fSharedInputValues.getBoolean("ipb_collector_solenoid_position");
 
+			case "st_collector_retract":
+				return mIsStowed && !mRollersOn;
 
 			case "st_collector_floor_intake":
-				return fSharedInputValues.getBoolean("ipb_driver_left_trigger");
+				return !mIsStowed && mRollersOn;
 
 			case "st_collector_extend":
-				return fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_trigger") && !fSharedInputValues.getBoolean("ipb_collector_solenoid_position");
+				return !mIsStowed && !mRollersOn;
+
+
 			default:
 				return false;
 		}
