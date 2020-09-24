@@ -18,11 +18,11 @@ general:
   subsystems: [ss_drivetrain, ss_collector]
 
   input_booleans: [
-    ipb_operator_right_bumper, ipb_operator_left_bumper
+    ipb_operator_right_bumper, ipb_operator_left_bumper, ipb_driver_left_trigger
   ]
 
   input_numerics: [
-
+    ipn_driver_left_y,ipn_driver_right_x
   ]
 
   input_vectors: []
