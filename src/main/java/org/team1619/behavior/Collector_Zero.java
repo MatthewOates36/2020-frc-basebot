@@ -1,0 +1,66 @@
+package org.team1619.behavior;
+
+import org.uacr.models.behavior.Behavior;
+import org.uacr.shared.abstractions.InputValues;
+import org.uacr.shared.abstractions.OutputValues;
+import org.uacr.shared.abstractions.RobotConfiguration;
+import org.uacr.utilities.Config;
+import org.uacr.utilities.Timer;
+import org.uacr.utilities.logging.LogManager;
+import org.uacr.utilities.logging.Logger;
+
+import java.util.Set;
+
+/**
+ * Sets the zero to for the Collector
+ */
+
+public class Collector_Zero implements Behavior {
+
+	private static final Logger sLogger = LogManager.getLogger(Collector_Zero.class);
+	private static final Set<String> sSubsystems = Set.of("ss_collector");
+
+	private final InputValues fSharedInputValues;
+	private final OutputValues fSharedOutputValues;
+	private Timer myTimer;
+	private long timeoutTime = 500;
+
+
+
+	public Collector_Zero(InputValues inputValues, OutputValues outputValues, Config config, RobotConfiguration robotConfiguration) {
+		fSharedInputValues = inputValues;
+		fSharedOutputValues = outputValues;
+		myTimer = new Timer();
+	}
+
+	@Override
+	public void initialize(String stateName, Config config) {
+		sLogger.debug("Entering state {}", stateName);
+		fSharedOutputValues.setBoolean("opb_collectors_deploy", true);
+		myTimer.start(timeoutTime);
+	}
+
+	@Override
+	public void update() {
+		fSharedOutputValues.setNumeric("opn_collectors_rollers","percent", 0);
+		if(myTimer.isDone()) {
+			fSharedInputValues.setBoolean("ipb_collector_has_been_zeroed", true);
+		}
+	}
+
+	@Override
+	public void dispose() {
+
+	}
+
+	@Override
+	public boolean isDone() {
+		return fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed");
+
+	}
+
+	@Override
+	public Set<String> getSubsystems() {
+		return sSubsystems;
+	}
+}

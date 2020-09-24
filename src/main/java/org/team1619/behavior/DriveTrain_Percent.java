@@ -23,6 +23,7 @@ public class DriveTrain_Percent implements Behavior {
 	private final OutputValues fSharedOutputValues;
 	private final String fXAxis;
 	private final String fYAxis;
+	private final String fGear;
 
 	private String mStateName;
 
@@ -31,6 +32,7 @@ public class DriveTrain_Percent implements Behavior {
 		fSharedOutputValues = outputValues;
 		fXAxis = robotConfiguration.getString("global_drivetrain", "x");
 		fYAxis = robotConfiguration.getString("global_drivetrain", "y");
+		fGear = robotConfiguration.getString("global_drivetrain", "gear_shift");
 
 		mStateName = "DriveTrain";
 	}
@@ -46,6 +48,7 @@ public class DriveTrain_Percent implements Behavior {
 	public void update() {
 		double xAxis = fSharedInputValues.getNumeric(fXAxis);
 		double yAxis = fSharedInputValues.getNumeric(fYAxis);
+		boolean gearShift = fSharedInputValues.getBoolean(fGear);
 
 		// Set the motor speed to the joystick values
 		double leftMotorSpeed = yAxis + xAxis;
@@ -67,22 +70,21 @@ public class DriveTrain_Percent implements Behavior {
 		}
 
 		// Set the motors
-		fSharedOutputValues.setNumeric("opn_drivetrain_front_left", "percent", leftMotorSpeed);
-		fSharedOutputValues.setNumeric("opn_drivetrain_front_right", "percent", rightMotorSpeed);
-		fSharedOutputValues.setNumeric("opn_drivetrain_back_left", "percent", leftMotorSpeed);
-		fSharedOutputValues.setNumeric("opn_drivetrain_back_right", "percent", rightMotorSpeed);
+		fSharedOutputValues.setNumeric("opn_drivetrain_left", "percent", leftMotorSpeed);
+		fSharedOutputValues.setNumeric("opn_drivetrain_right", "percent", rightMotorSpeed);
+		fSharedOutputValues.setBoolean("opb_drivetrain_gear_shifter", gearShift);
 
+		fSharedInputValues.setBoolean("ipb_is_low_gear", gearShift);
 	}
 
 
 	@Override
 	public void dispose() {
 		sLogger.trace("Leaving state {}", mStateName);
-		fSharedOutputValues.setNumeric("opn_drivetrain_front_left", "percent", 0.0);
-		fSharedOutputValues.setNumeric("opn_drivetrain_front_right", "percent", 0.0);
-		fSharedOutputValues.setNumeric("opn_drivetrain_back_left", "percent", 0.0);
-		fSharedOutputValues.setNumeric("opn_drivetrain_back_right", "percent", 0.0);
+		fSharedOutputValues.setNumeric("opn_drivetrain_left", "percent", 0.0);
+		fSharedOutputValues.setNumeric("opn_drivetrain_right", "percent", 0.0);
 		fSharedOutputValues.setBoolean("opb_drivetrain_gear_shifter", false);
+		fSharedInputValues.setBoolean("ipb_drivetrain_shifter", false);
 	}
 
 	@Override
