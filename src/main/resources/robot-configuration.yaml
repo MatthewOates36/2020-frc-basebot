@@ -18,7 +18,7 @@ general:
   subsystems: [ss_drivetrain, ss_collector]
 
   input_booleans: [
-    ipb_operator_right_bumper, ipb_operator_left_bumper, ipb_driver_left_trigger
+    ipb_operator_right_bumper, ipb_operator_left_bumper, ipb_operator_left_trigger
   ]
 
   input_numerics: [
@@ -46,11 +46,11 @@ global_timing:
 global_drivetrain:
   x: ipn_driver_right_x
   y: ipn_driver_left_y
-  gear_shift: ipb_driver_left_trigger
+  gear_shift: ipb_operator_left_trigger
 
 global_collector:
-  floor_intake: ipb_driver_left_trigger
-  stop: ipb_driver_right_bumper
+  floor_intake: ipb_operator_left_bumper
+  stop: ipb_operator_right_bumper
 
 log:
 
