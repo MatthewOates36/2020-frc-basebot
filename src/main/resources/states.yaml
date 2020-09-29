@@ -1,18 +1,9 @@
 single_state:
-
-  # ------ Drivetrain ------
-
-  st_drivetrain_zero:
-    behavior: bh_drivetrain_zero
-    behavior_config:
-      timeout_time: 1000
-      zeroing_threshold: 0.1
-
+  # Drivetrain
   st_drivetrain_percent:
     behavior: bh_drivetrain_percent
 
-  # ------ Collector ------
-
+  # Collector
   st_collector_zero:
     behavior: bh_collector_zero
     behavior_config:
@@ -36,16 +27,53 @@ single_state:
       solenoid_position: false
       roller_speed: 0.0
 
-  # ------ Pure Pursuit ------
+  # Hopper
+  st_hopper_zero:
+    behavior: bh_hopper_zero
+    behavior_config:
+      hopper_speed: 0.0
+      kicker_position: false
+      timeout_time: 500
+
+  st_hopper_home:
+    behavior: bh_hopper_states
+    behavior_config:
+      hopper_speed: 0.2
+      kicker_position: false
+      timeout_time: 500
+
+  st_hopper_collect:
+    behavior: bh_hopper_states
+    behavior_config:
+      hopper_speed: 0.5
+      kicker_position: false
+      timeout_time: 0.0
+
+  st_hopper_shoot:
+    behavior: bh_hopper_states
+    behavior_config:
+      hopper_speed: 0.2
+      kicker_position: true
+      timeout_time: 0.0
+
+  st_hopper_stop:
+    behavior: bh_hopper_states
+    behavior_config:
+      hopper_speed: 0.0
+      kicker_position: 0.0
+      timeout_time: 0.0
 
 done_for_time_state:
 
-# ------ Drivetrain ------
-
 parallel_state:
+  pl_floor_intake:
+    foreground_states: [st_collector_floor_intake, st_hopper_collect]
 
-# ------ Autos ------
+  pl_prime:
+    foreground_states: [st_collector_extend, st_hopper_home]
 
-sequencer_state:
+  pl_shoot:
+    foreground_states: [st_collector_extend, st_hopper_shoot]
 
-# ------ Autos ------
+  pl_protect:
+    foreground_states: [st_collector_retract, st_hopper_stop]

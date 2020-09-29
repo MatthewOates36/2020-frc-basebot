@@ -6,3 +6,7 @@ solenoid_double:
   opb_collector_deploy:
     device_number_master: 5
     device_number_slave: 2
+
+  opb_hopper_kicker:
+    device_number_master: 3
+    device_number_slave: 4

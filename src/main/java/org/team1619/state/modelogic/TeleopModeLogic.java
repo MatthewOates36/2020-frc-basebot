@@ -18,10 +18,20 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	private boolean collectorIsDown;
 	private boolean rollersAreOn;
 
+	private boolean fFloorCollect;
+	private boolean fShoot;
+	private boolean fPrime;
+	private boolean fProtect;
+
 	public TeleopModeLogic(InputValues inputValues, RobotConfiguration robotConfiguration) {
 		super(inputValues, robotConfiguration);
 		collectorIsDown = true;
 		rollersAreOn = false;
+
+		fFloorCollect = false;
+		fShoot = false;
+		fPrime = false;
+		fProtect = false;
 	}
 
 	@Override
@@ -31,14 +41,43 @@ public class TeleopModeLogic extends AbstractModeLogic {
 
 	@Override
 	public void update() {
-
-		if(fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_trigger")) {
-			collectorIsDown = true;
-			rollersAreOn = !rollersAreOn;
+//		if(fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_trigger")) {
+//			collectorIsDown = true;
+//			rollersAreOn = !rollersAreOn;
+//		}
+//		if(fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_bumper")) {
+//			collectorIsDown = false;
+//			rollersAreOn = false;
+//		}
+		if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_trigger")) {
+			fFloorCollect = !fFloorCollect;
+			fPrime = false;
+			fShoot = false;
+			fProtect = false;
 		}
-		if(fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_bumper")) {
-			collectorIsDown = false;
-			rollersAreOn = false;
+		if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_bumper")) {
+			fFloorCollect = false;
+			fPrime = false;
+			fShoot = false;
+			fProtect = true;
+		}
+		if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_right_trigger")) {
+			fFloorCollect = false;
+			fPrime = false;
+			fShoot = true;
+			fProtect = false;
+		}
+		if (fSharedInputValues.getBooleanFallingEdge("ipb_operator_right_trigger")){
+			fFloorCollect = false;
+			fPrime = false;
+			fShoot = false;
+			fProtect = false;
+		}
+		if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_right_bumper")) {
+			fFloorCollect = false;
+			fPrime = true;
+			fShoot = false;
+			fProtect = false;
 		}
 
 	}
@@ -59,6 +98,14 @@ public class TeleopModeLogic extends AbstractModeLogic {
 				return collectorIsDown && !rollersAreOn;
 			case "st_collector_retract":
 				return !collectorIsDown && !rollersAreOn;
+			case "pl_floor_intake":
+				return fFloorCollect && !fPrime && !fShoot && !fProtect;
+			case "pl_prime":
+				return !fFloorCollect && fPrime && !fShoot && !fProtect;
+			case "pl_shoot":
+				return !fFloorCollect && !fPrime && fShoot && !fProtect;
+			case "pl_protect":
+				return !fFloorCollect && !fPrime && !fShoot && fProtect;
 			default:
 				return false;
 		}
@@ -67,6 +114,14 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	@Override
 	public boolean isDone(String name, State state) {
 		switch (name) {
+			case "pl_floor_intake":
+				return !fFloorCollect;
+			case "pl_prime":
+				return !fPrime;
+			case "pl_shoot":
+				return !fShoot;
+			case "pl_protect":
+				return !fProtect;
 			default:
 				return state.isDone();
 		}

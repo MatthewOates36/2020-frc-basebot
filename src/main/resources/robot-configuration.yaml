@@ -15,8 +15,12 @@ general:
         priority_level_2: [st_collector_zero]
         priority_level_1: [st_collector_floor_intake, st_collector_extend, st_collector_retract]
         default: []
+    ss_hopper:
+      priority_level_2: [st_hopper_zero]
+      priority_level_1: [st_hopper_home, st_hopper_collect, st_hopper_shoot]
+      default: [st_hopper_stop]
 
-  subsystems: [ss_drivetrain, ss_collector]
+  subsystems: [ss_drivetrain, ss_collector, ss_hopper]
 
   input_booleans: [
     ipb_driver_left_bumper, ipb_driver_right_bumper, ipb_driver_left_trigger, ipb_driver_right_trigger, ipb_operator_left_bumper, ipb_operator_right_bumper, ipb_operator_left_trigger, ipb_operator_right_trigger, ipb_driver_x]
@@ -28,19 +32,9 @@ general:
 
   input_vectors: []
 
-  output_numerics: [opn_drivetrain_left, opn_drivetrain_right, opn_collector_roller]
+  output_numerics: [opn_drivetrain_left, opn_drivetrain_right, opn_collector_roller, opn_hopper]
 
-  output_booleans: [opb_drivetrain_shifter, opb_collector_deploy]
-
-
-global_timing:
-  frame_time_threshold_input_service: 80
-  frame_time_threshold_logging_service: 80
-  frame_time_threshold_output_service: 80
-  frame_time_threshold_state_service: 80
-  frame_time_threshold_webdashboard_service: 80
-  frame_cycle_time_threshold_core_thread: 80
-  frame_cycle_time_threshold_info_thread: 80
+  output_booleans: [opb_drivetrain_shifter, opb_collector_deploy, opb_hopper_kicker]
 
 log:
 

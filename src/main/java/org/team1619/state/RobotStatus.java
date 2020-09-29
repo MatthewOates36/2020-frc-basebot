@@ -27,13 +27,14 @@ public class RobotStatus extends AbstractRobotStatus {
 		// Zero
 		if (!fSharedInputValues.getBoolean("ipb_robot_has_been_zeroed")) {
 			fSharedInputValues.setBoolean("ipb_collector_has_been_zeroed", false);
+			fSharedInputValues.setBoolean("ipb_hopper_has_been_zeroed", false);
 
 		}
 	}
 
 	@Override
 	public void update() {
-		if (!fSharedInputValues.getBoolean("ipb_robot_has_been_zeroed") && fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed")) {
+		if (!fSharedInputValues.getBoolean("ipb_robot_has_been_zeroed") && fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed") && fSharedInputValues.getBoolean("ipb_hopper_has_been_zeroed")) {
 			fSharedInputValues.setBoolean("ipb_robot_has_been_zeroed", true);
 		}
 	}
