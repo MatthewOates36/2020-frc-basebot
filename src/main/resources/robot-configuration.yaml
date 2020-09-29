@@ -9,13 +9,11 @@ general:
     parallels:
 
     ss_drivetrain:
-      priority_level_1: [st_drivetrain_percent]
       default: [st_drivetrain_percent]
 
     ss_collector:
-      priority_level_3: [st_collector_zero]
-      priority_level_2: [st_collector_extend, st_collector_retract]
-      priority_level_1: [st_collector_floor_intake]
+      priority_level_2: [st_collector_zero]
+      priority_level_1: [st_collector_floor_intake, st_collector_extend, st_collector_retract]
 
 
   subsystems: [ss_drivetrain, ss_collector]
@@ -23,11 +21,12 @@ general:
 
 
   input_booleans: [
-    ipb_driver_left_bumper, ipb_driver_right_bumper, ipb_driver_left_trigger, ipb_driver_right_trigger, ipb_driver_right_stick_button,
+    ipb_driver_left_trigger, ipb_operator_left_trigger, ipb_operator_left_bumper
+
   ]
 
   input_numerics: [
-    ipn_driver_left_y, ipn_driver_left_x, ipn_driver_right_y, ipn_driver_right_x,
+    ipn_driver_left_y, ipn_driver_right_x,
   ]
 
   input_vectors: []
@@ -49,10 +48,9 @@ global_timing:
 global_drivetrain:
   x: ipn_driver_right_x
   y: ipn_driver_left_y
-  gear_shift_button: ipb_driver_right_trigger
+  gear_shift_button: ipb_driver_left_trigger
 
 global_collector:
-  deploy_button: ipb_operator_left_trigger
   delay_time: 500
 
 

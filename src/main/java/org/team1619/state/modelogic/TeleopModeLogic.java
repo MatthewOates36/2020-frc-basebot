@@ -15,8 +15,8 @@ public class TeleopModeLogic extends AbstractModeLogic {
 
 	private static final Logger sLogger = LogManager.getLogger(TeleopModeLogic.class);
 
-	boolean mIsStowed = false;
-	boolean mRollersOn= false;
+	boolean mIsStowed = true;
+	boolean mRollersOn= true;
 
 
 
@@ -35,15 +35,15 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	public void update() {
 
 
-		if(fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_bumper")) {
+		if(fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_bumper")) {
 
-			mRollersOn = false;
+			mRollersOn = true;
 			mIsStowed = false;
 
 
 		}
 
-		if(fSharedInputValues.getBooleanRisingEdge("ipb_driver_left_trigger") ) {
+		if(fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_trigger") ) {
 
 			mRollersOn = !mRollersOn;
 			mIsStowed = true;
