@@ -29,6 +29,10 @@ talon:
     device_number: 5
     inverted: false
 
+  opn_hopper:
+    device_number: 4
+    inverted: true
+
 
 victor:
 

@@ -57,7 +57,6 @@ public class Drivetrain_Percent implements Behavior {
 
 
 		fSharedOutputValues.setBoolean("opb_drivetrain_gear_shifter", gearShiftButtonValue);
-		fSharedInputValues.setBoolean("ipb_is_low_gear", gearShiftButtonValue);
 
 	}
 
