@@ -5,7 +5,7 @@ single_state:
   st_example:
     behavior: bh_example
     behavior_config:
-      config_value: 1000
+      config_key: 1000
 
   st_example_default:
     behavior: bh_example

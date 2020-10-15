@@ -40,7 +40,7 @@ public class Behavior_Example implements Behavior {
 	public void initialize(String stateName, Config config) {
 		sLogger.debug("Entering state {}", stateName);
 
-		mConfigurationValue = config.getInt("config_value", 0);
+		mConfigurationValue = config.getInt("config_key", 0);
 		mTimer.start(mConfigurationValue);
 	}
 
