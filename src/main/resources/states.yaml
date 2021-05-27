@@ -1,20 +1,24 @@
 single_state:
 
-# ------ Example ------
-
   st_example:
     behavior: bh_example
     behavior_config:
-      config_key: 1000
-
-  st_example_default:
-    behavior: bh_example
-    behavior_config:
-
+    config_key: 1000
 
 done_for_time_state:
+#  wt_example:
+#    state: st_example
+#    state_timeout: 500
+#    max_timeout: 500
+
 
 parallel_state:
+#  pl_example:
+#    foreground_states: [ st_example ]
+#    background_states: [ st_example2 ]
+
 
 sequencer_state:
+#  sq_example:
+#    sequence: [st_example, st_example2]
 
